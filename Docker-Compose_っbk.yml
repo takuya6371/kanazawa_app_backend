@@ -1,0 +1,24 @@
+version: '3'
+volumes:                           # ※ホストOSで永続化
+    postgres_data:
+        driver: 'local'
+services:
+  world_news:
+    image: python:3.8-buster
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    container_name: 'world_news'
+    environment:
+      POSTGRES_PASSWORD: postgres  #スーパーユーザ(postgres)のパスワード
+      POSTGRES_USER: kanazawa          #ユーザアカウント
+      POSTGRES_PASSWORD: dockerkanazawa  #ユーザアカウントのパスワード
+      POSTGRES_DB: world_news          #DB名
+      TZ: 'Asia/Tokyo'
+    ports:
+      - 15432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/sql:/docker-entrypoint-initdb.d
+      - ./:/tmp/work/
+    tty: true  # コンテナを立ち上げた後、起動させたままにする(このオプションを付けないと起動しても、すぐ停止してしまう)

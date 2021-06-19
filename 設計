@@ -1,0 +1,111 @@
+【table】
+・country
+id
+country
+
+drop table exclude_urls;
+create table exclude_urls (
+  id SERIAL NOT NULL,
+  url varchar(255)
+);
+
+
+drop table country;
+create table country (
+  id SERIAL NOT NULL,
+  country varchar(255)
+);
+
+・crawl_urls
+id
+country
+home_url
+
+drop table crawl_urls;
+create table crawl_urls (
+  id SERIAL not null,
+  country int not null,
+  site_name varchar(255) not null,
+  site_url varchar(255) not null,
+  target_page_url varchar(255),
+  target_tag text[][],
+  hrefs_type int,
+  article_keyword_type varchar(255) not null,
+  article_keyword varchar(255) not null,
+  article_title_tag_key_list text[][] not null,
+  article_content_tag_key_list text[][] not null,
+  article_genre_tag_key_list text[][] not null,
+  article_date_tag_key_list text[][] not null,
+  created_at TIMESTAMP default CURRENT_TIMESTAMP not null,
+  updated_at TIMESTAMP default CURRENT_TIMESTAMP not null
+);
+
+INSERT INTO "public"."crawl_urls" ("id", "country", "site_name", "site_url", "target_page_url", "article_keyword_type", "article_keyword", "article_title_tag_key_list", "article_content_tag_key_list", "article_genre_tag_key_list", "article_date_tag_key_list", "created_at", "updated_at") VALUES
+(1, 1, 'Naminian', 'https://www.namibian.com.na/', 'Home', 'url', '/read/', '{{.top-stories,0,NULL,NULL,NULL},{article,0,NULL,NULL,NULL},{h2,0,NULL,NULL,NULL}}', '{{.top-stories,0,NULL,NULL,NULL},{article,1,NULL,NULL,NULL}}', '{{.top-stories,0,NULL,NULL,NULL},{article,0,NULL,NULL,NULL},{time,0,NULL,NULL,NULL},{split,|,0,NULL,NULL}}', '{{.top-stories,0,NULL,NULL,NULL},{article,0,NULL,NULL,NULL},{time,0,NULL,NULL,NULL},{split,|,1,NULL,NULL}}', '2021-06-16 10:55:21.985607', '2021-06-16 10:55:21.985607');
+
+・news_list_original
+id SERIAL NOT NULL,
+site_id int,
+country int,
+date TIMESTAMP,
+url text,
+genre varchar(255),
+title text,
+text text,
+created_at TIMESTAMP default CURRENT_TIMESTAMP not null,
+updated_at TIMESTAMP default CURRENT_TIMESTAMP not null
+
+
+drop table news_list_original;
+create table news_list_original (
+  id SERIAL NOT NULL,
+  site_id int,
+  country int,
+  date TIMESTAMP,
+  url text,
+  genre varchar(255),
+  title text,
+  text text,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP,
+  PRIMARY KEY ( id, url )
+);
+
+drop table news_list_translate;
+create table news_list_translate (
+  id SERIAL NOT NULL,
+  original_id int NOT NULL,
+  site_id int,
+  country int,
+  date TIMESTAMP,
+  url text,
+  genre varchar(255),
+  title text,
+  text text,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP,
+  PRIMARY KEY ( id, url )
+);
+
+【PG】
+・バッチ
+DBからサイト取得
+サイトをスクリーニング
+ログに登録
+ローデータ登録
+翻訳
+翻訳を登録
+
+・画面
+一覧
+翻訳
+翻訳前記事
+
+・API
+記事一覧
+記事情報
+
+
+
+INSERT INTO "public"."crawl_urls" ("id", "country", "site_name", "site_url", "target_page_url", "article_url_keyword", "article_title_tag_key_list", "article_content_tag_key_list", "article_genre_tag_key_list","article_date_tag_key_list") VALUES
+(1, 1, 'Naminian', 'https://www.namibian.com.na/', 'Home', '/read/', '{{.top-stories,0,null,null,null},{article,0,null,null,null},{h2,0,null,null,null}}', '{{.top-stories,0,null,null,null},{article,1,null,null,null}}', '{{.top-stories,0,null,null,null},{article,0,null,null,null},{time,0,null,null,null},{split,|,0,null,null}}', '{{.top-stories,0,null,null,null},{article,0,null,null,null},{time,1,null,null,null},{split,|,1,null,null}}');

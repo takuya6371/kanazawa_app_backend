@@ -1,0 +1,1 @@
+select * from news_list_original where url=%s

@@ -1,0 +1,1 @@
+select * from exclude_urls where url=%s

@@ -1,0 +1,2 @@
+INSERT INTO "public"."crawl_urls" ("id", "country", "site_name", "site_url", "target_page_url", "article_url_keyword", "article_title_tag_key_list", "article_content_tag_key_list") VALUES
+(1, 1, 'Naminian', 'https://www.namibian.com.na/', 'Home', '/read/', '{{.top-stories,1},{article,1}}', '{{.top-stories,1},{article,2}}');

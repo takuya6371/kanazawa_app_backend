@@ -1,0 +1,11 @@
+beautifulsoup4==4.9.1
+Flask==1.1.2
+Flask-Cors==3.0.9
+googletrans==3.0.0
+requests==2.23.0
+python-dotenv==0.17.1
+psycopg2
+pandas
+mypy
+django
+djangorestframework

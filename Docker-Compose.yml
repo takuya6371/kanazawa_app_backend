@@ -1,0 +1,37 @@
+version: '3'
+volumes:                           # ※ホストOSで永続化
+    postgres_data:
+        driver: 'local'
+services:
+  postgres:
+    build:
+      context: ./docker/postgres
+      dockerfile: Dockerfile
+    container_name: 'postgres_db'
+    environment:
+      POSTGRES_PASSWORD: postgres  #スーパーユーザ(postgres)のパスワード
+      POSTGRES_USER: kanazawa          #ユーザアカウント
+      POSTGRES_PASSWORD: dockerkanazawa  #ユーザアカウントのパスワード
+      POSTGRES_DB: world_news          #DB名
+      TZ: 'Asia/Tokyo'
+    ports:
+      - 15432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data    # ※ホストOSで永続化
+      - ./postgres/sql:/docker-entrypoint-initdb.d
+    networks:
+      - world-news-net
+  python: # サービス名
+    build:
+      context: ./docker/python
+      dockerfile: Dockerfile
+    image: python:3.8-buster # 使うイメージを指定
+    container_name: python-backend # コンテナの名前
+    volumes:
+      - ./:/tmp/work/ #現在のフォルダをコンテナにマウント
+    tty: true  # コンテナを立ち上げた後、起動させたままにする(このオプションを付けないと起動しても、すぐ停止してしまう)
+    networks:
+      - world-news-net
+networks:
+  world-news-net:
+    driver: bridge

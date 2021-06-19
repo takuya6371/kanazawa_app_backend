@@ -1,0 +1,1 @@
+INSERT INTO news_list_translate (site_id,original_id,country,date,url,genre,title,text) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)

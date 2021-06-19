@@ -1,0 +1,1 @@
+INSERT INTO exclude_urls (url) VALUES (%s)
