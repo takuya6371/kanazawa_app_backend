@@ -1,0 +1,5 @@
+curl http://127.0.0.1:5000/world_news/news_list_translate?country=1
+
+curl http://127.0.0.1:5000/world_news/news_list_original?id=1
+
+curl http://127.0.0.1:5000/world_news/country_list
