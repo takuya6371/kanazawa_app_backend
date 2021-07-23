@@ -29,7 +29,7 @@ services:
     container_name: uwsgi # コンテナの名前
     volumes:
       - ./api:/var/www/ #現在のフォルダをコンテナにマウント
-    tty: true  # コンテナを立ち上げた後、起動させたままにする(このオプションを付けないと起動しても、すぐ停止してしまう)
+    tty: true  # コンテナを立ち上げた後、起動させたままにする(このオプションを付けないと起動しても、すぐ停止してしまう)a
     networks:
       - world-news-net
   nginx:

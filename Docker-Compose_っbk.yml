@@ -10,7 +10,7 @@ services:
       dockerfile: Dockerfile
     container_name: 'world_news'
     environment:
-      POSTGRES_PASSWORD: postgres  #スーパーユーザ(postgres)のパスワード
+      POSTGRES_PASSWORD: postgres  #スーパーユーザ(postgres)のパスワードs
       POSTGRES_USER: kanazawa          #ユーザアカウント
       POSTGRES_PASSWORD: dockerkanazawa  #ユーザアカウントのパスワード
       POSTGRES_DB: world_news          #DB名
