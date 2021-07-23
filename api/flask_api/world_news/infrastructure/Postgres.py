@@ -2,7 +2,7 @@ import psycopg2
 
 class Postgres:
     def __init__(self):
-        self.sql_path = 'world_news/sql/'
+        self.sql_path = 'flask_api/world_news/sql/'
         self.con = psycopg2.connect(
             'host=' + 'postgres_db' +
             ' port=' + '5432' +

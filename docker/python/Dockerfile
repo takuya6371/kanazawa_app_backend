@@ -1,4 +1,7 @@
 FROM python:3.8-buster
-WORKDIR /tmp/work
-ADD requirements.txt /tmp/work
-RUN pip install -r requirements.txt
+RUN mkdir -p /var/www
+WORKDIR /var/www
+ADD requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+CMD ["uwsgi","--ini","/var/www/flask_api/uwsgi.ini"]
+RUN ls

@@ -1,5 +1,5 @@
 # coding: UTF-8
-from api.flask_api.world_news.usecase import news
+from flask_api.world_news.usecase import news
 
 class News:
     def __init__(self):

@@ -7,5 +7,4 @@ python-dotenv==0.17.1
 psycopg2
 pandas
 mypy
-django
-djangorestframework
+uwsgi

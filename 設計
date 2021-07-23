@@ -13,7 +13,8 @@ create table exclude_urls (
 drop table country;
 create table country (
   id SERIAL NOT NULL,
-  country varchar(255)
+  country varchar(255),
+  country_ja varchar(255)
 );
 
 ・crawl_urls
@@ -24,7 +25,7 @@ home_url
 drop table crawl_urls;
 create table crawl_urls (
   id SERIAL not null,
-  country_id int not null,
+  country int not null,
   site_name varchar(255) not null,
   site_url varchar(255) not null,
   target_page_url varchar(255),
@@ -46,7 +47,7 @@ INSERT INTO "public"."crawl_urls" ("id", "country", "site_name", "site_url", "ta
 ・news_list_original
 id SERIAL NOT NULL,
 site_id int,
-country_id int,
+country int,
 date TIMESTAMP,
 url text,
 genre varchar(255),
@@ -60,7 +61,7 @@ drop table news_list_original;
 create table news_list_original (
   id SERIAL NOT NULL,
   site_id int,
-  country_id int,
+  country int,
   date TIMESTAMP,
   url text,
   genre varchar(255),
@@ -76,7 +77,7 @@ create table news_list_translate (
   id SERIAL NOT NULL,
   original_id int NOT NULL,
   site_id int,
-  country_id int,
+  country int,
   date TIMESTAMP,
   url text,
   genre varchar(255),

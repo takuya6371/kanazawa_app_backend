@@ -1,8 +1,8 @@
 # coding: UTF-8
 from flask import Flask, Blueprint, jsonify, request
-from api.flask_api.world_news.handler import news
-from api.flask_api.world_news.handler import country
-from api.flask_api.world_news.handler import site
+from flask_api.world_news.handler import news
+from flask_api.world_news.handler import country
+from flask_api.world_news.handler import site
 import traceback
 
 #import sys

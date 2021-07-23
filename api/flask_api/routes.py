@@ -32,23 +32,25 @@ from flask import Flask
 from flask_cors import CORS
 import sys
 import os
-sys.path.append(os.path.abspath("../../"))
-#他モジュール(.py)のインポート
-#from world_news.routes import world_news_api  #追加モジュール
-from api.flask_api.world_news.routes import world_news_api
+sys.path.append(os.path.abspath("../"))
+from flask_api.world_news.routes import world_news_api
+
+# 他モジュール(.py)のインポート
+# from world_news.routes import world_news_api  #追加モジュール
 
 api = Flask(__name__)
 
 CORS(api)
-#他モジュール(.py)から呼び出す
+# 他モジュール(.py)から呼び出す
 api.register_blueprint(world_news_api)
 
 
-#あとはレンダリング等の処理を記述
+# あとはレンダリング等の処理を記述
 @api.route('/')
 def login():
     return "HELLO"
 
+
 if __name__ == "__main__":
-    #api.run()
-    api.run(debug=True)
+     api.run()
+    #api.run(debug=True)

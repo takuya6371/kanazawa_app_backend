@@ -1,5 +1,5 @@
-from api.flask_api.world_news.infrastructure import PostgresSelect
-from api.flask_api.world_news.util.list import extractFromList
+from flask_api.world_news.infrastructure import PostgresSelect
+from flask_api.world_news.util.list import extractFromList
 
 class Country:
     def __init__(self):

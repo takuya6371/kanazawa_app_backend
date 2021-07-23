@@ -21,17 +21,31 @@ services:
       - ./postgres/sql:/docker-entrypoint-initdb.d
     networks:
       - world-news-net
-  python: # サービス名
+  uwsgi: # サービス名
     build:
       context: ./docker/python
       dockerfile: Dockerfile
     image: python:3.8-buster # 使うイメージを指定
-    container_name: python-backend # コンテナの名前
+    container_name: uwsgi # コンテナの名前
     volumes:
-      - ./:/tmp/work/ #現在のフォルダをコンテナにマウント
+      - ./api:/var/www/ #現在のフォルダをコンテナにマウント
     tty: true  # コンテナを立ち上げた後、起動させたままにする(このオプションを付けないと起動しても、すぐ停止してしまう)
     networks:
       - world-news-net
+  nginx:
+    build: ./docker/nginx
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      # nginxのログをホストOSの /tmp/nginx_log に出力する
+      - /tmp/nginx_log:/var/log/nginx
+    links:
+      - uwsgi
+    ports:
+      - "4231:80"
+    environment:
+      TZ: "Asia/Tokyo"
+    networks:
+      - world-news-net  
 networks:
   world-news-net:
     driver: bridge

@@ -1,6 +1,6 @@
 import psycopg2
 from psycopg2.extras import DictCursor
-from api.flask_api.world_news.infrastructure import Postgres
+from flask_api.world_news.infrastructure import Postgres
 import os
 
 class PostgresSelect(Postgres.Postgres):

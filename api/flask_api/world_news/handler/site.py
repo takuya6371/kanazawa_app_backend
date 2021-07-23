@@ -1,5 +1,5 @@
-from api.flask_api.world_news.infrastructure import PostgresSelect
-from api.flask_api.world_news.usecase import site
+from flask_api.world_news.infrastructure import PostgresSelect
+from flask_api.world_news.usecase import site
 
 class Site:
     def __init__(self):
