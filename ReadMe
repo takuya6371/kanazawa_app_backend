@@ -1,2 +1,4 @@
 docker-compose build
 docker-compose up -d
+docker network inspect bridge
+/root/docker/kanazawa_app_backend/batch/exec.sh
