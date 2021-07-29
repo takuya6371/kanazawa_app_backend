@@ -38,7 +38,7 @@ class PostgresInsert(Postgres.Postgres):
         try:
             last_id = self.insert_news_list_original(
                 url_info['id'],
-                url_info['country'],
+                url_info['country_id'],
                 article_info['date'],
                 article_info['url'],
                 article_info['title'],
@@ -50,7 +50,7 @@ class PostgresInsert(Postgres.Postgres):
             self.insert_news_list_translate(
                 url_info['id'],
                 last_id,
-                url_info['country'],
+                url_info['country_id'],
                 article_info['date'],
                 article_info['url'],
                 article_info['trans_title'],

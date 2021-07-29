@@ -1,3 +1,4 @@
+import traceback
 from batch.src.infrastructure import GoogleTrans
 from batch.src.infrastructure import BeautifulSoup
 from batch.src.infrastructure import PostgresInsert
@@ -84,7 +85,11 @@ class ProcessScrapeData:
                 #print(a_tag.get('href'))
                 try:
                     article_info = {}
-                    url = url_info['site_url'] + a_tag.get('href') if url_info['hrefs_type'] == href_type_divide else a_tag.get('href')
+                    print(a_tag)
+                    print(url_info['hrefs_type'])
+                    print(a_tag.get('href'))
+                    print(url_info['site_url'])
+                    url = url_info['site_url'] + '/' + a_tag.get('href') if url_info['hrefs_type'] == href_type_divide else a_tag.get('href')
                     print(url)
                     if a_tag.get('href') is not None and len(self.PostgresSelect.select_article_url(url)) == 0 and len(self.PostgresSelect.select_exclude_urls(url)) == 0:
                         article_soup = self.extract_article_elem(url)
@@ -124,6 +129,8 @@ class ProcessScrapeData:
                         if a_tag.get('href') is not None:
                             print('already registered:'+a_tag.get('href'))
                 except Exception as e:
+                    print(e)
+                    traceback.print_exc()
                     if a_tag.get('href') is not None:
                         print('skip:'+a_tag.get('href'))
                     continue    

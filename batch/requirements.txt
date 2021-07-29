@@ -1,0 +1,7 @@
+beautifulsoup4==4.9.1
+googletrans==3.0.0
+requests==2.23.0
+python-dotenv==0.17.1
+psycopg2
+pandas
+mypy
