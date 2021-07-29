@@ -21,4 +21,4 @@
 # For more information see the manual pages of crontab(5) and cron(8)
 # 
 # m h  dom mon dow   command
-0 18 * * * cd /root/docker/kanazawa_app_backend/batch && ./exec.sh > log.txt
+0 18 * * * cd /root/docker/kanazawa_app_backend/batch && sh exec.sh > log.txt
