@@ -78,18 +78,23 @@ class ProcessScrapeData:
 
     def run (self, url_info):
         try:
+            register_cnt = 0;
             a_tags = []
             url_soup = self.beautifulSoup.run(url_info['site_url'] + url_info['target_page_url'])
             a_tags = self.extract_target_tag(url_soup, url_info['target_tag'])
             for a_tag in list(set(a_tags)):
                 #print(a_tag.get('href'))
+                if register_cnt >= 10:
+                    print(url_info['site_url'] + ' end')
+                    break
                 try:
                     article_info = {}
                     print(a_tag)
                     print(url_info['hrefs_type'])
                     print(a_tag.get('href'))
                     print(url_info['site_url'])
-                    url = url_info['site_url'] + '/' + a_tag.get('href') if url_info['hrefs_type'] == href_type_divide else a_tag.get('href')
+                    slash = '/' if not a_tag.get('href')[0] == '/' else ''
+                    url = url_info['site_url'] + slash + a_tag.get('href') if url_info['hrefs_type'] == href_type_divide else a_tag.get('href')
                     print(url)
                     if a_tag.get('href') is not None and len(self.PostgresSelect.select_article_url(url)) == 0 and len(self.PostgresSelect.select_exclude_urls(url)) == 0:
                         article_soup = self.extract_article_elem(url)
@@ -125,6 +130,7 @@ class ProcessScrapeData:
                             #print(trans_title)
                             #print(trans_content)
                             self.registor_article(article_info, url_info)
+                            register_cnt += 1
                     else:
                         if a_tag.get('href') is not None:
                             print('already registered:'+a_tag.get('href'))

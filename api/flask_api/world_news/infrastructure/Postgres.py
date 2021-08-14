@@ -1,5 +1,5 @@
 import psycopg2
-
+import os
 class Postgres:
     def __init__(self):
         self.sql_path = 'flask_api/world_news/sql/'
@@ -22,7 +22,13 @@ class Postgres:
         for i, (key, value) in enumerate(params.items()):
             print(key)
             print(value)
-            clause = clause + (' where ' if clause == '' else ' ') + key +'=%s' 
+            if 'start_' in key:
+                key = key.split('start_')[1] + ' between %s'
+            elif 'end_' in key:
+                key = '%s'
+            else:
+                key = key +'=%s'
+            clause = clause + (' where ' if clause == '' else ' and ') + key
             sql_params.append(value)
         print(clause)
         print(sql_params)

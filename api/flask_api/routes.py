@@ -52,5 +52,5 @@ def login():
 
 
 if __name__ == "__main__":
-     api.run()
-    #api.run(debug=True)
+    #api.run()
+    api.run(debug=True)

@@ -17,6 +17,7 @@ class CollectNews:
     def run(self):
         try:
             url_info_list = self.get_data()
+            print(url_info_list)
             for url_info in url_info_list:
                 self.ProcessScrapeData.run(url_info)
         except Exception as e:

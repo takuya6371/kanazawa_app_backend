@@ -23,13 +23,12 @@ services:
       - world-news-net
   uwsgi: # サービス名
     build:
-      context: ./docker/python
+      context: ./docker/python/api
       dockerfile: Dockerfile
-    image: python:3.8-buster # 使うイメージを指定
-    container_name: uwsgi # コンテナの名前
+    container_name: world_news_api # コンテナの名前
     volumes:
       - ./api:/var/www/ #現在のフォルダをコンテナにマウント
-    tty: true  # コンテナを立ち上げた後、起動させたままにする(このオプションを付けないと起動しても、すぐ停止してしまう)a
+    tty: true  # コンテナを立ち上げた後、起動させたままにする(このオプションを付けないと起動しても、すぐ停止してしまう)
     networks:
       - world-news-net
   nginx:
@@ -46,6 +45,16 @@ services:
       TZ: "Asia/Tokyo"
     networks:
       - world-news-net  
+  batch:
+    build:
+      context: ./docker/python/batch
+      dockerfile: Dockerfile
+    container_name: world_news_batch # コンテナの名前
+    volumes:
+      - ./batch:/batch
+    tty: true  # コンテナを立ち上げた後、起動させたままにする(このオプションを付けないと起動しても、すぐ停止してしまう)
+    networks:
+      - world-news-net
 networks:
   world-news-net:
     driver: bridge
