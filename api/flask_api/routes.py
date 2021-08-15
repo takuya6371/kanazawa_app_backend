@@ -50,9 +50,9 @@ api.register_blueprint(world_news_api)
 def login():
     return "HELLO"
 
-@api.route('/.well-known/acme-challenge/3NC3Q0NIfMkQ1Q8g8ngTVSxb5tPgjBQ1cA0WMA0_o1Y')
+@api.route('/.well-known/acme-challenge/GEjw6s9B77bFoHhllZsSHMwRQj2NX0FIEUs4IhbhI6c')
 def test():
-    filepath = "./3NC3Q0NIfMkQ1Q8g8ngTVSxb5tPgjBQ1cA0WMA0_o1Y"
+    filepath = "./GEjw6s9B77bFoHhllZsSHMwRQj2NX0FIEUs4IhbhI6c"
     filename = os.path.basename(filepath)
     return send_file(filepath, as_attachment=True,
                      attachment_filename=filename,
